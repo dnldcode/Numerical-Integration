@@ -25,7 +25,7 @@ namespace Project4.Classes
 			return I;
 		}
 
-		public double GetIntegralSimpson(double a, double b, int n = 2)
+		public double GetIntegralSimpson(double a, double b, int n = 1000)
 		{
 			if (n % 2 != 0) throw new Exception("Value n should be even!");
 
@@ -33,8 +33,8 @@ namespace Project4.Classes
 			double I = h / 3 * (_polynomial.Calculate(a) + _polynomial.Calculate(b));
 			for (int i = 1; i < n; i++)
 			{
-				int coefficient = (i / 2 == 0) ? 2 : 4;
-				I += coefficient * _polynomial.Calculate(a + i * h);
+				int coefficient = (i % 2 == 0) ? 2 : 4;
+				I += h / 3 * coefficient * _polynomial.Calculate(a + i * h);
 			}
 
 			return I;
